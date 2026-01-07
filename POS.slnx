@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Source/" />
+  <Folder Name="/Source/Core/">
+    <Project Path="POS.Core.Application/POS.Core.Application.csproj" />
+    <Project Path="POS.Core.Domain/POS.Core.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Source/Infrastructure/">
+    <Project Path="POS.Infrastructure.Persistence/POS.Infrastructure.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/Source/Presentation/" />
+  <Folder Name="/Source/Presentation/WebApi/">
+    <Project Path="POS/POS.WebApi.csproj" />
+  </Folder>
+</Solution>

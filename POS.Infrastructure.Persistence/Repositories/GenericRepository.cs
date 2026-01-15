@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using POS.Core.Application.Common.DTOs;
 using POS.Core.Application.Interfaces.Repositories;
 using POS.Infrastructure.Persistence.Contexts;
+using POS.Infrastructure.Persistence.Utilities;
 
 namespace POS.Infrastructure.Persistence.Repositories
 {
@@ -30,9 +32,13 @@ namespace POS.Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<Entity>> GetAllAsync()
+        public async Task<IEnumerable<Entity>> GetAllAsync(PaginationFilter filter)
         {
-            return await _dbContext.Set<Entity>().ToListAsync();
+            var queryable = _dbContext.Set<Entity>().AsQueryable();
+
+            return await queryable
+                            .Paginate(filter.Page, filter.RecordsPerPage)
+                            .ToListAsync();
         }
 
         public async Task<Entity?> GetByIdAsync(int id)

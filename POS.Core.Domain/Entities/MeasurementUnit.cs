@@ -21,7 +21,7 @@ namespace POS.Core.Domain.Entities
         
         private void ApplyBusinessRuleForName(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
                 throw new BusinessRuleException("El nombre no puede estar vacío");
 
             if (name.Length > 20)
@@ -30,10 +30,10 @@ namespace POS.Core.Domain.Entities
 
         private void ApplyBusinessRuleForAbbreviation(string abbreviation)
         {
-            if (string.IsNullOrEmpty(abbreviation))
+            if (string.IsNullOrWhiteSpace(abbreviation))
                 throw new BusinessRuleException("La abreviatura no puede estar vacío");
 
-            if (abbreviation.Length > 20)
+            if (abbreviation.Length > 3)
                 throw new BusinessRuleException("La abreviatura no puede tener más de 3 caracteres");
         }
     }

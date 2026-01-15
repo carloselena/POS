@@ -11,4 +11,7 @@
   <Folder Name="/Source/Presentation/WebApi/">
     <Project Path="POS/POS.WebApi.csproj" />
   </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="POS.Tests/POS.Tests.csproj" Id="2a6cc99c-7edd-41a4-908b-55f0164fd34f" />
+  </Folder>
 </Solution>

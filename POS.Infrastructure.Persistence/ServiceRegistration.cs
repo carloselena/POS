@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using POS.Core.Application.Interfaces.Persistence;
 using POS.Core.Application.Interfaces.Repositories;
 using POS.Infrastructure.Persistence.Contexts;
 using POS.Infrastructure.Persistence.Repositories;
+using POS.Infrastructure.Persistence.UnitOfWork;
 
 namespace POS.Infrastructure.Persistence
 {
@@ -19,6 +21,7 @@ namespace POS.Infrastructure.Persistence
 
             #region Repositories
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWorkEFCore>();
             #endregion
         }
     }

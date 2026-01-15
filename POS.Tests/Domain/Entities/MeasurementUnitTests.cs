@@ -4,7 +4,7 @@ using POS.Core.Domain.Exceptions;
 namespace POS.Tests.Domain.Entities
 {
     [TestClass]
-    public class MeassurementUnitTests
+    public class MeasurementUnitTests
     {
         [TestMethod]
         public void Constructor_NameNull_ThrowsException()

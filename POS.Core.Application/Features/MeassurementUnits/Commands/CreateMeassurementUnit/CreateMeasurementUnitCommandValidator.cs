@@ -2,10 +2,10 @@
 
 namespace POS.Core.Application.Features.MeassurementUnits.Commands.CreateMeassurementUnit
 {
-    public class CreateMeassurementUnitCommandValidator
-        : AbstractValidator<CreateMeassurementUnitCommand>
+    public class CreateMeasurementUnitCommandValidator
+        : AbstractValidator<CreateMeasurementUnitCommand>
     {
-        public CreateMeassurementUnitCommandValidator()
+        public CreateMeasurementUnitCommandValidator()
         {
             RuleFor(mu => mu.Name)
                 .NotNull()

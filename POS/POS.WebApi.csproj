@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\POS.Infrastructure.Persistence\POS.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 

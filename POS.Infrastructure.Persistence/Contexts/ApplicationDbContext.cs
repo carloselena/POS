@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using POS.Core.Domain.Entities;
 
 namespace POS.Infrastructure.Persistence.Contexts
 {
@@ -12,5 +13,7 @@ namespace POS.Infrastructure.Persistence.Contexts
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
+
+        public DbSet<MeasurementUnit> MeasurementUnits { get; set; }
     }
 }

@@ -20,8 +20,9 @@ namespace POS.Infrastructure.Persistence
                                                         .Assembly.FullName)));
 
             #region Repositories
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWorkEFCore>();
+            services.AddScoped<IMeasurementUnitRepository, MeasurementUnitRepository>();
             #endregion
         }
     }

@@ -1,0 +1,10 @@
+@POS_HostAddress = https://localhost:7020/api/v1/measurementunits
+
+POST {{POS_HostAddress}}
+Content-Type: application/json
+
+{
+    "name": "Kilogramo",
+    "abbreviation": "Kg"
+}
+###

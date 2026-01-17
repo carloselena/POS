@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public decimal ITBIS { get; set; }
 
+        private readonly List<Product> Products => _products.AsReadOnly();
+
         private  Category (){}
 
         private Category(string  Name, decimal itbis){

@@ -18,6 +18,15 @@ namespace POS.Core.Domain.Entities
             Name = name;
             Abbreviation = abbreviation;
         }
+
+        public void Update(string name, string abbreviation)
+        {
+            ApplyBusinessRuleForName(name);
+            ApplyBusinessRuleForAbbreviation(abbreviation);
+
+            Name = name;
+            Abbreviation = abbreviation;
+        }
         
         private void ApplyBusinessRuleForName(string name)
         {

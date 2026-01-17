@@ -1,5 +1,4 @@
 ﻿using POS.Core.Domain.Exceptions;
-using POS.Core.Domain.Exceptions.BusinessRuleException;
 
 namespace POS.Core.Domain.Entities
 {

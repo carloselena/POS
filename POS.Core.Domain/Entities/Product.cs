@@ -17,5 +17,19 @@
 
         public int MeasurementUnitId { get; set; }
         public MeasurementUnit? MeasurementUnit { get; set; }
+
+        private Product(){};
+
+
+        public void updateCode(string newCode){
+            if(string.IsNullOrWhiteSpace(newCode))
+                throw new BusinessRuleExecption("El codigo es obligatorio");
+            
+            if(newCode.length > 20)
+                throw new BusinessRuleException("EL codigo no debe exeder los 20 caracteres");
+
+            BarCode = newCode.trim().ToUpperInvariant();
+        }
+
     }
 }

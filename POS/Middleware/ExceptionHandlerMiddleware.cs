@@ -34,9 +34,12 @@ namespace POS.Middleware
 
             switch (exception)
             {
-                case NotFoundException:
+                case NotFoundException notFoundEx:
                     statusCode = HttpStatusCode.NotFound;
-                    result = JsonSerializer.Serialize(new { Message = exception.Message });
+                    result = JsonSerializer.Serialize(new { 
+                        Message = notFoundEx.Message,
+                        ErrorType = "NotFound"
+                    });
                     break;
                 case ValidationException validationEx:
                     statusCode = HttpStatusCode.BadRequest;

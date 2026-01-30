@@ -1,7 +1,10 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using POS.Core.Application.Common.DTOs;
 using POS.Core.Application.Features.MeassurementUnits.Commands.CreateMeassurementUnit;
 using POS.Core.Application.Features.MeassurementUnits.Commands.UpdateMeasurementUnit;
+using POS.Core.Application.Features.MeassurementUnits.Queries;
+using POS.Core.Application.Features.MeassurementUnits.Queries.GetAllMeasurementUnits;
 using System.Net.Mime;
 
 namespace POS.WebApi.Controllers.v1
@@ -9,6 +12,19 @@ namespace POS.WebApi.Controllers.v1
     [ApiVersion("1.0")]
     public class MeasurementUnitsController : BaseApiController
     {
+        [HttpGet]
+        [ProducesResponseType(typeof(PagedResult<MeasurementUnitDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get([FromQuery] GetAllMeasurementUnitsQuery query)
+        {
+            var response = await Mediator.Send(query);
+            if (response.Items.Count == 0)
+                return NoContent();
+
+            return Ok(response);
+        }
+
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]

@@ -46,7 +46,7 @@ namespace POS.Infrastructure.Persistence.Repositories
             return await _dbContext.Set<Entity>().FindAsync(id);
         }
 
-        public async Task<int> GetTotalRows()
+        public async Task<int> GetTotalRowsAsync()
         {
             return await _dbContext.Set<Entity>().CountAsync();
         }

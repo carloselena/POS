@@ -10,6 +10,6 @@ namespace POS.Core.Application.Interfaces.Repositories
         Task<IEnumerable<Entity>> GetAllAsync(PaginationFilter filter);
         Task<Entity?> GetByIdAsync(int id);
         Task DeleteAsync(Entity entity);
-        Task<int> GetTotalRows();
+        Task<int> GetTotalRowsAsync();
     }
 }

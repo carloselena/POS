@@ -5,11 +5,11 @@ using System.Text.Json;
 
 namespace POS.Middleware
 {
-    public class BusinessRuleExceptionMiddleware
+    public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public BusinessRuleExceptionMiddleware(RequestDelegate next)
+        public ExceptionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -66,11 +66,11 @@ namespace POS.Middleware
         }
     }
 
-    public static class BusinessRuleExceptionMiddlewareExtensions
+    public static class ExceptionHandlerMiddlewareExtensions
     {
-        public static IApplicationBuilder UseBusinessRuleExceptionHandling(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<BusinessRuleExceptionMiddleware>();
+            return builder.UseMiddleware<ExceptionHandlerMiddleware>();
         }
     }
 }

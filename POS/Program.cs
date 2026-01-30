@@ -26,7 +26,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseBusinessRuleExceptionHandling();
+app.UseExceptionHandler();
 
 app.UseAuthorization();
 

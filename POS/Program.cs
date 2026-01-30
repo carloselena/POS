@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using POS.Core.Application;
 using POS.Core.Application.Features.MeassurementUnits.Commands.CreateMeassurementUnit;
 using POS.Infrastructure.Persistence;
+using POS.Middleware;
 using POS.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,11 +25,20 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateMeasurementUnitComman
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
 app.UseHttpsRedirection();
 
-app.UseExceptionHandler();
-
 app.UseAuthorization();
+app.UseExceptionHandlerMiddleware();
 
 app.UseHealthChecks("/health");
 

@@ -41,7 +41,7 @@ namespace POS.Middleware
                         ErrorType = "NotFound"
                     });
                     break;
-                case ValidationException validationEx:
+                case ValidationErrorException validationEx:
                     statusCode = HttpStatusCode.BadRequest;
                     result = JsonSerializer.Serialize(new { 
                         Message = "Validation failed",
@@ -71,7 +71,7 @@ namespace POS.Middleware
 
     public static class ExceptionHandlerMiddlewareExtensions
     {
-        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseExceptionHandlerMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<ExceptionHandlerMiddleware>();
         }

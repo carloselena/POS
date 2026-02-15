@@ -1,4 +1,4 @@
-﻿using Core.Shared.Abstractions;
+﻿using Blocks.Domain.Abstractions;
 using Inventory.Domain.MeasurementUnit.ValueObjects;
 
 namespace Inventory.Domain.MeasurementUnit;

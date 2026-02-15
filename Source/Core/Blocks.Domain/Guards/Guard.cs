@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Core.Shared.Guards;
+namespace Blocks.Domain.Guards;
 
 public static partial class Guard
 {

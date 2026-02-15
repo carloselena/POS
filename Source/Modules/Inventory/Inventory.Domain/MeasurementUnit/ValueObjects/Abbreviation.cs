@@ -1,5 +1,5 @@
-﻿using Core.Shared.Guards;
-using Core.Shared.ValueObjects;
+﻿using Blocks.Domain.Guards;
+using Blocks.Domain.ValueObjects;
 
 namespace Inventory.Domain.MeasurementUnit.ValueObjects;
 

@@ -1,4 +1,4 @@
-﻿namespace Core.Shared.Abstractions;
+﻿namespace Blocks.Domain.Abstractions;
 
 public abstract class AggregateRoot<TId> : IAggregateRoot<TId>
     where TId : notnull

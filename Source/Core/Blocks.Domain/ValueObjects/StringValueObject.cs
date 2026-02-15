@@ -1,4 +1,4 @@
-﻿namespace Core.Shared.ValueObjects;
+﻿namespace Blocks.Domain.ValueObjects;
 
 public abstract record StringValueObject(string Value)
 {

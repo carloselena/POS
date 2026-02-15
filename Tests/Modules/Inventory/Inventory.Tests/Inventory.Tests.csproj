@@ -21,4 +21,8 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Source\Modules\Inventory\Inventory.Domain\Inventory.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Core.Shared.Exceptions;
+﻿namespace Blocks.Domain.Exceptions;
 
 public class DomainException(string message) : Exception(message)
 {

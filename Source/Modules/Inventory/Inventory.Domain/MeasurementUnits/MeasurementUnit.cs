@@ -1,7 +1,7 @@
 ﻿using Blocks.Domain.Abstractions;
-using Inventory.Domain.MeasurementUnit.ValueObjects;
+using Inventory.Domain.MeasurementUnits.ValueObjects;
 
-namespace Inventory.Domain.MeasurementUnit;
+namespace Inventory.Domain.MeasurementUnits;
 
 public class MeasurementUnit : AggregateRoot
 {

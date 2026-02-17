@@ -1,6 +1,6 @@
-﻿using Inventory.Domain.MeasurementUnit.ValueObjects;
+﻿using Inventory.Domain.MeasurementUnits.ValueObjects;
 
-namespace Inventory.Tests.Domain.MeasurementUnit.ValueObjects;
+namespace Inventory.Tests.Domain.MeasurementUnits.ValueObjects;
 
 public class NameTests
 {

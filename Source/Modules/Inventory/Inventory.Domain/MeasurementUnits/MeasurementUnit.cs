@@ -14,6 +14,7 @@ public class MeasurementUnit : AggregateRoot
     {
         Name = name;
         Abbreviation = abbreviation;
+        Id = Guid.CreateVersion7();
     }
 
     public void Update(Name name, Abbreviation abbreviation)

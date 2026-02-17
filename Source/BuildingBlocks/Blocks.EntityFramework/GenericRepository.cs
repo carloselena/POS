@@ -20,7 +20,7 @@ public class GenericRepository<TAggregate, TContext> : IGenericRepository<TAggre
 
     public virtual DbSet<TAggregate> Entity => _entity;
 
-    public virtual IQueryable<TAggregate> Query => _entity;
+    protected virtual IQueryable<TAggregate> Query() => _entity;
 
     public virtual async Task<TAggregate?> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
         => await _entity.FindAsync([id], cancellationToken: cancellationToken);

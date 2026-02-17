@@ -3,7 +3,7 @@ using Inventory.Domain.MeasurementUnit.ValueObjects;
 
 namespace Inventory.Domain.MeasurementUnit;
 
-public class MeasurementUnit : AggregateRoot<int>
+public class MeasurementUnit : AggregateRoot
 {
     public Name Name { get; private set; }
     public Abbreviation Abbreviation { get; private set; }

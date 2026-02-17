@@ -1,11 +1,10 @@
 ﻿namespace Blocks.Domain.Abstractions;
 
-public abstract class AggregateRoot<TId> : IAggregateRoot<TId>
-    where TId : notnull
+public abstract class AggregateRoot: IAggregateRoot
 {
-    public TId Id { get; protected set; } = default!;
+    public Guid Id { get; protected set; } = Guid.Empty;
 
-    private readonly List<IDomainEvent> _domainEvents = new();
+    private readonly List<IDomainEvent> _domainEvents = [];
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents;
 
     protected void AddDomainEvent(IDomainEvent domainEvent)

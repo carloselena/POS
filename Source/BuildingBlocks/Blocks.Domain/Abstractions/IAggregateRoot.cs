@@ -1,9 +1,8 @@
 ﻿namespace Blocks.Domain.Abstractions;
 
-public interface IAggregateRoot<TId>
-    where TId : notnull
+public interface IAggregateRoot
 {
-    TId Id { get; }
+    Guid Id { get; }
     
     IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
     

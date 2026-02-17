@@ -1,4 +1,4 @@
-﻿using Inventory.Domain.MeasurementUnit;
+﻿using Inventory.Domain.MeasurementUnits;
 
 namespace Inventory.Persistence.Repositories;
 

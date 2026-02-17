@@ -1,7 +1,7 @@
 ﻿using Blocks.Domain.Guards;
 using Blocks.Domain.ValueObjects;
 
-namespace Inventory.Domain.MeasurementUnit.ValueObjects;
+namespace Inventory.Domain.MeasurementUnits.ValueObjects;
 
 public sealed record Name : StringValueObject
 {

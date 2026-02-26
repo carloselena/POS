@@ -16,8 +16,8 @@ namespace Inventory.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Abbreviation = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false),
-                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Abbreviation = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false)
                 },
                 constraints: table =>
                 {

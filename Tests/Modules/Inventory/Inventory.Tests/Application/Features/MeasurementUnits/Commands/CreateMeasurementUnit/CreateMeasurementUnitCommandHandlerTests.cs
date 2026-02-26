@@ -47,8 +47,8 @@ public class CreateMeasurementUnitCommandHandlerTests
         // Assert
         _measurementUnitRepositoryMock.Verify(
             x => x.AddAsync(It.Is<MeasurementUnit>(mu => 
-                mu.Name == command.Name &&
-                mu.Abbreviation == command.Abbreviation),
+                mu.MeasurementUnitName == command.Name &&
+                mu.MeasurementUnitAbbreviation == command.Abbreviation),
                 It.IsAny<CancellationToken>()),
             Times.Once);
             

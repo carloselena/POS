@@ -2,32 +2,32 @@
 
 namespace Inventory.Tests.Domain.MeasurementUnits.ValueObjects;
 
-public class NameTests
+public class MeasurementUnitNameTests
 {
     [Test]
     public void ShouldCreateNameWhenValueIsValid()
     {
         const string value = "Meter";
-        var name = new Name(value);
+        var name = new MeasurementUnitName(value);
         Assert.That(name.Value, Is.EqualTo(value));
     }
 
     [Test]
     public void ShouldThrowWhenValueIsNull()
     {
-        Assert.Throws<ArgumentException>(() => new Name(null!));
+        Assert.Throws<ArgumentException>(() => new MeasurementUnitName(null!));
     }
 
     [Test]
     public void ShouldThrowWhenValueIsEmpty()
     {
-        Assert.Throws<ArgumentException>(() => new Name(string.Empty));
+        Assert.Throws<ArgumentException>(() => new MeasurementUnitName(string.Empty));
     }
     
     [Test]
     public void ShouldThrowWhenValueIsWhiteSpace()
     {
-        Assert.Throws<ArgumentException>(() => new Name("   "));
+        Assert.Throws<ArgumentException>(() => new MeasurementUnitName("   "));
     }
     
     [Test]
@@ -35,7 +35,7 @@ public class NameTests
     {
         var value = new string('A', 21);
 
-        Assert.Throws<ArgumentException>(() => new Name(value));
+        Assert.Throws<ArgumentException>(() => new MeasurementUnitName(value));
     }
     
     [Test]
@@ -43,7 +43,7 @@ public class NameTests
     {
         var value = new string('A', 20);
 
-        var name = new Name(value);
+        var name = new MeasurementUnitName(value);
 
         Assert.That(name.Value, Is.EqualTo(value));
     }

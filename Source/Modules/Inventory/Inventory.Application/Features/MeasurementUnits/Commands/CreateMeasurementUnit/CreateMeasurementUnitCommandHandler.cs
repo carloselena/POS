@@ -24,7 +24,7 @@ public class CreateMeasurementUnitCommandHandler : IRequestHandler<CreateMeasure
         if (await _measurementUnitRepository.ExistsByAbbreviationAsync(command.Abbreviation, cancellationToken))
             throw new DomainException("Ya existe una unidad de medida con esa abreviatura");
 
-        var measurementUnit = new MeasurementUnit(new Name(command.Name), new Abbreviation(command.Abbreviation));
+        var measurementUnit = new MeasurementUnit(new MeasurementUnitName(command.Name), new MeasurementUnitAbbreviation(command.Abbreviation));
 
         await _measurementUnitRepository.AddAsync(measurementUnit, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);

@@ -1,4 +1,4 @@
-﻿using Blocks.EntityFramework;
+using Blocks.EntityFramework;
 
 namespace Inventory.Persistence;
 

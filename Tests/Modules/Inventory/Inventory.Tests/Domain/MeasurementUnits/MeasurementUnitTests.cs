@@ -11,18 +11,18 @@ public class MeasurementUnitTests
         const string nameValue = "Meter";
         const string abbreviationValue = "m";
         
-        var name = new Name(nameValue);
-        var abbreviation = new Abbreviation(abbreviationValue);
+        var name = new MeasurementUnitName(nameValue);
+        var abbreviation = new MeasurementUnitAbbreviation(abbreviationValue);
         
         var measurementUnit = new MeasurementUnit(name, abbreviation);
         
-        Assert.That(measurementUnit.Name, Is.EqualTo(name));
-        Assert.That(measurementUnit.Abbreviation, Is.EqualTo(abbreviation));
+        Assert.That(measurementUnit.MeasurementUnitName, Is.EqualTo(name));
+        Assert.That(measurementUnit.MeasurementUnitAbbreviation, Is.EqualTo(abbreviation));
     }
 
     [Test]
     public void ShouldThrowWhenValuesAreInvalid()
     {
-        Assert.Throws<ArgumentException>(() => new MeasurementUnit(new Name(string.Empty), new Abbreviation(string.Empty)));
+        Assert.Throws<ArgumentException>(() => new MeasurementUnit(new MeasurementUnitName(string.Empty), new MeasurementUnitAbbreviation(string.Empty)));
     }
 }

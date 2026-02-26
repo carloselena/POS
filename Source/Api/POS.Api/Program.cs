@@ -17,6 +17,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapAllEndpoints();
+var api = app.MapGroup("/api/v1");
+api.MapAllEndpoints();
 
 app.Run();

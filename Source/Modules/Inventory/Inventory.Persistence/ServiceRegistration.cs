@@ -17,6 +17,7 @@ public static class ServiceRegistration
             options.UseNpgsql(connectionString, b
                 => b.MigrationsAssembly(typeof(InventoryDbContext).Assembly.FullName)));
 
+        services.AddScoped<IUnitOfWork, InventoryUnitOfWork>();
         services.AddScoped<IMeasurementUnitRepository, MeasurementUnitRepository>();
     }
 }

@@ -7,9 +7,8 @@ namespace Blocks.EntityFramework;
 
 public static class RepositoryExtensions
 {
-    public static async Task<TEntity> FindByIdOrThrowAsync<TEntity, TContext>(
-        this GenericRepository<TEntity, TContext> repository, Guid id, string propertyName)
-        where TContext : DbContext
+    public static async Task<TEntity> FindByIdOrThrowAsync<TEntity>(
+        this IGenericRepository<TEntity> repository, Guid id, string propertyName)
         where TEntity : class, IAggregateRoot
     {
         var entity = await repository.FindByIdAsync(id);
@@ -23,9 +22,8 @@ public static class RepositoryExtensions
         return entity ?? throw new NotFoundException($"Recurso {propertyName} no encontrado");
     }
     
-    public static async Task<TEntity> GetByIdOrThrowAsync<TEntity, TContext>(
-        this GenericRepository<TEntity, TContext> repository, Guid id, string propertyName)
-        where TContext : DbContext
+    public static async Task<TEntity> GetByIdOrThrowAsync<TEntity>(
+        this IGenericRepository<TEntity> repository, Guid id, string propertyName)
         where TEntity : class, IAggregateRoot
     {
         var entity = await repository.GetByIdAsync(id);

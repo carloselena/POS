@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blocks.EntityFramework;
 
-public class GenericRepository<TAggregate, TContext> : IGenericRepository<TAggregate>
+public abstract class GenericRepository<TAggregate, TContext> : IGenericRepository<TAggregate>
     where TAggregate : class, IAggregateRoot
     where TContext : DbContext
 {
@@ -29,7 +29,5 @@ public class GenericRepository<TAggregate, TContext> : IGenericRepository<TAggre
         => await _entity.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
     public virtual async Task AddAsync(TAggregate aggregateRoot, CancellationToken cancellationToken = default)
-    {
-        await _entity.AddAsync(aggregateRoot, cancellationToken);
-    }
+        => await _entity.AddAsync(aggregateRoot, cancellationToken);
 }

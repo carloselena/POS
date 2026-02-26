@@ -20,23 +20,22 @@ public class ValidationBehavior<TRequest, TResponse>
         CancellationToken cancellationToken
     )
     {
-        if (_validators.Any())
-        {
-            var context = new ValidationContext<TRequest>(request);
+        if (!_validators.Any()) return await next(cancellationToken);
+        
+        var context = new ValidationContext<TRequest>(request);
 
-            var results = await Task.WhenAll(
-                _validators.Select(v => v.ValidateAsync(context, cancellationToken))
-            );
+        var results = await Task.WhenAll(
+            _validators.Select(v => v.ValidateAsync(context, cancellationToken))
+        );
 
-            var failures = results
-                .SelectMany(r => r.Errors)
-                .Where(f => f is not null)
-                .ToList();
+        var failures = results
+            .SelectMany(r => r.Errors)
+            .Where(f => f is not null)
+            .ToList();
 
-            if (failures.Count > 0)
-                throw new ValidationErrorException(failures);
-        }
+        if (failures.Count > 0)
+            throw new ValidationErrorException(failures);
 
-        return await next();
+        return await next(cancellationToken);
     }
 }

@@ -5,21 +5,21 @@ namespace Inventory.Domain.MeasurementUnits;
 
 public class MeasurementUnit : AggregateRoot
 {
-    public Name Name { get; private set; }
-    public Abbreviation Abbreviation { get; private set; }
+    public MeasurementUnitName MeasurementUnitName { get; private set; }
+    public MeasurementUnitAbbreviation MeasurementUnitAbbreviation { get; private set; }
     
     private MeasurementUnit() { }
 
-    public MeasurementUnit(Name name, Abbreviation abbreviation)
+    public MeasurementUnit(MeasurementUnitName measurementUnitName, MeasurementUnitAbbreviation measurementUnitAbbreviation)
     {
-        Name = name;
-        Abbreviation = abbreviation;
+        MeasurementUnitName = measurementUnitName;
+        MeasurementUnitAbbreviation = measurementUnitAbbreviation;
         Id = Guid.CreateVersion7();
     }
 
-    public void Update(Name name, Abbreviation abbreviation)
+    public void Update(MeasurementUnitName measurementUnitName, MeasurementUnitAbbreviation measurementUnitAbbreviation)
     {
-        Name = name;
-        Abbreviation = abbreviation;
+        MeasurementUnitName = measurementUnitName;
+        MeasurementUnitAbbreviation = measurementUnitAbbreviation;
     }
 }

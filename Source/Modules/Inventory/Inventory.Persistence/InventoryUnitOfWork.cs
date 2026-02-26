@@ -1,6 +1,6 @@
-﻿namespace Inventory.Persistence;
+using Blocks.EntityFramework;
 
-public class InventoryUnitOfWork
-{
-    
-}
+namespace Inventory.Persistence;
+
+public class InventoryUnitOfWork(InventoryDbContext dbContext)
+    : UnitOfWorkEfCore<InventoryDbContext>(dbContext);

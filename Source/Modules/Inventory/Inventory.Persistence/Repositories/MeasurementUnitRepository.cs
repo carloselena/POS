@@ -15,4 +15,9 @@ public class MeasurementUnitRepository(InventoryDbContext dbContext)
     {
         return await Query().AnyAsync(mu => mu.MeasurementUnitAbbreviation.Value == abbreviation, cancellationToken);
     }
+
+    public async Task<List<MeasurementUnit>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await Query().ToListAsync(cancellationToken);
+    }
 }

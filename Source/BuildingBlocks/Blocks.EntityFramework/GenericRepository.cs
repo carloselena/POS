@@ -7,18 +7,18 @@ public abstract class GenericRepository<TAggregate, TContext> : IGenericReposito
     where TAggregate : class, IAggregateRoot
     where TContext : DbContext
 {
-    protected readonly TContext _dbContext;
-    protected readonly DbSet<TAggregate> _entity;
+    private readonly TContext _dbContext;
+    private readonly DbSet<TAggregate> _entity;
 
-    public GenericRepository(TContext dbContext)
+    protected GenericRepository(TContext dbContext)
     {
         _dbContext = dbContext;
         _entity = _dbContext.Set<TAggregate>();
     }
 
-    public TContext Context => _dbContext;
+    protected TContext Context => _dbContext;
 
-    public virtual DbSet<TAggregate> Entity => _entity;
+    protected DbSet<TAggregate> Entity => _entity;
 
     protected virtual IQueryable<TAggregate> Query() => _entity;
 

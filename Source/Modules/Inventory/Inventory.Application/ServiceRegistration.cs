@@ -10,11 +10,14 @@ public static class ServiceRegistration
 {
     public static void AddApplicationServices(this IServiceCollection services)
     {
+        var assembly = Assembly.GetExecutingAssembly();
+
+        services.AddAutoMapper(assembly);
         services
             .AddValidatorsFromAssemblyContaining<CreateMeasurementUnitCommandValidator>()
             .AddMediatR(config =>
             {
-                config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                config.RegisterServicesFromAssembly(assembly);
                 config.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
     }

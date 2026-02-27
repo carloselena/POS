@@ -10,7 +10,7 @@ namespace Inventory.Presentation.Endpoints.MeasurementUnits;
 
 public static class GetMeasurementUnitByIdEndpoint
 {
-    public static void MapGetMeasurementUnitByIdEndpoint(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapGetMeasurementUnitByIdEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapGet("measurement-units/{id:guid}", async (
             [FromRoute] Guid id,
@@ -26,5 +26,7 @@ public static class GetMeasurementUnitByIdEndpoint
         .Produces<MeasurementUnitDto>()
         .ProducesProblem(StatusCodes.Status404NotFound)
         .ProducesProblem(StatusCodes.Status500InternalServerError);
+        
+        return app;
     }
 }

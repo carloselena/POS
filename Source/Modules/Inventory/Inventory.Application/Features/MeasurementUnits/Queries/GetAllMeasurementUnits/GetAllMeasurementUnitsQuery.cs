@@ -1,6 +1,5 @@
-﻿namespace Inventory.Application.Features.MeasurementUnits.Queries.GetAllMeasurementUnits;
+﻿using MediatR;
 
-public class GetAllMeasurementUnitsQuery
-{
-    
-}
+namespace Inventory.Application.Features.MeasurementUnits.Queries.GetAllMeasurementUnits;
+
+public record GetAllMeasurementUnitsQuery : IRequest<List<MeasurementUnitDto>>;

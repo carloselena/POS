@@ -7,9 +7,10 @@ public static class EndpointsRegistration
     public static IEndpointRouteBuilder MapAllEndpoints(this IEndpointRouteBuilder app)
     {
         #region MeasurementUnits
-        app.MapCreateMeasurementUnitEndpoint();
-        app.MapGetMeasurementUnitsEndpoint();
-        app.MapGetMeasurementUnitByIdEndpoint();
+        app
+            .MapCreateMeasurementUnitEndpoint()
+            .MapGetMeasurementUnitsEndpoint()
+            .MapGetMeasurementUnitByIdEndpoint();
         #endregion
         
         return app;

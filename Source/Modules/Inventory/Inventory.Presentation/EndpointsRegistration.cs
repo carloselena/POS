@@ -9,6 +9,7 @@ public static class EndpointsRegistration
         #region MeasurementUnits
         app.MapCreateMeasurementUnitEndpoint();
         app.MapGetMeasurementUnitsEndpoint();
+        app.MapGetMeasurementUnitByIdEndpoint();
         #endregion
         
         return app;

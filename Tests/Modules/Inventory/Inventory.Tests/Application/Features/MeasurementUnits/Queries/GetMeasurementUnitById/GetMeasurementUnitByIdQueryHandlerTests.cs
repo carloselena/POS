@@ -45,7 +45,7 @@ public class GetMeasurementUnitByIdQueryHandlerTests
     }
     
     [Test]
-    public async Task Handle_WhenMeasurementUnitDoesNotExist_ThrowsNotFoundException()
+    public void Handle_WhenMeasurementUnitDoesNotExist_ThrowsNotFoundException()
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -58,20 +58,23 @@ public class GetMeasurementUnitByIdQueryHandlerTests
 
         // Act & Assert
         var ex = Assert.ThrowsAsync<NotFoundException>(
-            async () => await _handler.Handle(query, CancellationToken.None));
+            async () => await _handler.Handle(query, CancellationToken.None)
+        );
 
         Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Contain("unidad de medida"));
 
         _repositoryMock.Verify(
             x => x.FindByIdAsync(id, It.IsAny<CancellationToken>()),
-            Times.Once);
+            Times.Once
+        );
     }
     
     private static MeasurementUnit CreateMeasurementUnit(string name, string abbreviation)
     {
         return new MeasurementUnit(
             new MeasurementUnitName(name),
-            new MeasurementUnitAbbreviation(abbreviation));
+            new MeasurementUnitAbbreviation(abbreviation)
+        );
     }
 }

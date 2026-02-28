@@ -8,25 +8,25 @@ namespace Blocks.EntityFramework;
 public static class RepositoryExtensions
 {
     public static async Task<TEntity> FindByIdOrThrowAsync<TEntity>(
-        this IGenericRepository<TEntity> repository, Guid id, string propertyName)
+        this IGenericRepository<TEntity> repository, Guid id, string propertyName, CancellationToken cancellationToken = default)
         where TEntity : class, IAggregateRoot
     {
-        var entity = await repository.FindByIdAsync(id);
+        var entity = await repository.FindByIdAsync(id, cancellationToken);
         return entity ?? throw new NotFoundException($"Recurso {propertyName} no encontrado");
     }
     
-    public static async Task<TEntity> FindByIdOrThrowAsync<TEntity>(this DbSet<TEntity> dbSet, Guid id, string propertyName)
+    public static async Task<TEntity> FindByIdOrThrowAsync<TEntity>(this DbSet<TEntity> dbSet, Guid id, string propertyName, CancellationToken cancellationToken = default)
         where TEntity : class, IAggregateRoot
     {
-        var entity = await dbSet.FindAsync(id);
+        var entity = await dbSet.FindAsync(id, cancellationToken);
         return entity ?? throw new NotFoundException($"Recurso {propertyName} no encontrado");
     }
     
     public static async Task<TEntity> GetByIdOrThrowAsync<TEntity>(
-        this IGenericRepository<TEntity> repository, Guid id, string propertyName)
+        this IGenericRepository<TEntity> repository, Guid id, string propertyName, CancellationToken cancellationToken = default)
         where TEntity : class, IAggregateRoot
     {
-        var entity = await repository.GetByIdAsync(id);
+        var entity = await repository.GetByIdAsync(id, cancellationToken);
         return entity ?? throw new NotFoundException($"Recurso {propertyName} no encontrado");
     }
 }

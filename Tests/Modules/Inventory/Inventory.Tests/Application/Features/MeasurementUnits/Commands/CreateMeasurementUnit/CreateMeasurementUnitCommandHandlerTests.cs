@@ -7,6 +7,7 @@ using Shouldly;
 
 namespace Inventory.Tests.Application.Features.MeasurementUnits.Commands.CreateMeasurementUnit;
 
+[TestFixture]
 public class CreateMeasurementUnitCommandHandlerTests
 {
     private Mock<IMeasurementUnitRepository> _measurementUnitRepositoryMock;
@@ -58,7 +59,7 @@ public class CreateMeasurementUnitCommandHandlerTests
     }
 
     [Test]
-    public async Task ShouldThrowDomainExceptionWhenNameAlreadyExists()
+    public void ShouldThrowDomainExceptionWhenNameAlreadyExists()
     {
         // Arrange
         var command = new CreateMeasurementUnitCommand("Metro", "m");
@@ -81,7 +82,7 @@ public class CreateMeasurementUnitCommandHandlerTests
     }
 
     [Test]
-    public async Task ShouldThrowDomainExceptionWhenAbbreviationAlreadyExists()
+    public void ShouldThrowDomainExceptionWhenAbbreviationAlreadyExists()
     {
         // Arrange
         var command = new CreateMeasurementUnitCommand("Liter", "L");

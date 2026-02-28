@@ -14,7 +14,7 @@ public class GetMeasurementUnitByIdQueryHandler : IRequestHandler<GetMeasurement
     }
     public async Task<MeasurementUnitDto> Handle(GetMeasurementUnitByIdQuery request, CancellationToken cancellationToken)
     {
-        var measurementUnit = await _measurementUnitRepository.FindByIdOrThrowAsync(request.Id,"unidad de medida");
+        var measurementUnit = await _measurementUnitRepository.FindByIdOrThrowAsync(request.Id,"unidad de medida", cancellationToken);
 
         return new MeasurementUnitDto
         {

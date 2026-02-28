@@ -18,10 +18,10 @@ public class CreateMeasurementUnitCommandHandler : IRequestHandler<CreateMeasure
     }
     public async Task Handle(CreateMeasurementUnitCommand command, CancellationToken cancellationToken)
     {
-        if (await _measurementUnitRepository.ExistsByNameAsync(command.Name, cancellationToken))
+        if (await _measurementUnitRepository.ExistsByNameAsync(command.Name, null, cancellationToken))
             throw new DomainException("Ya existe una unidad de medida con ese nombre");
         
-        if (await _measurementUnitRepository.ExistsByAbbreviationAsync(command.Abbreviation, cancellationToken))
+        if (await _measurementUnitRepository.ExistsByAbbreviationAsync(command.Abbreviation, null, cancellationToken))
             throw new DomainException("Ya existe una unidad de medida con esa abreviatura");
 
         var measurementUnit = new MeasurementUnit(new MeasurementUnitName(command.Name), new MeasurementUnitAbbreviation(command.Abbreviation));

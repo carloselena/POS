@@ -30,11 +30,11 @@ public class CreateMeasurementUnitCommandHandlerTests
         var command = new CreateMeasurementUnitCommand("Kilogramo", "kg");
         
         _measurementUnitRepositoryMock
-            .Setup(x => x.ExistsByNameAsync(command.Name, It.IsAny<CancellationToken>()))
+            .Setup(x => x.ExistsByNameAsync(command.Name, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
             
         _measurementUnitRepositoryMock
-            .Setup(x => x.ExistsByAbbreviationAsync(command.Abbreviation, It.IsAny<CancellationToken>()))
+            .Setup(x => x.ExistsByAbbreviationAsync(command.Abbreviation, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
             
         _unitOfWorkMock
@@ -64,7 +64,7 @@ public class CreateMeasurementUnitCommandHandlerTests
         var command = new CreateMeasurementUnitCommand("Metro", "m");
         
         _measurementUnitRepositoryMock
-            .Setup(x => x.ExistsByNameAsync(command.Name, It.IsAny<CancellationToken>()))
+            .Setup(x => x.ExistsByNameAsync(command.Name, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         // Act & Assert
@@ -87,11 +87,11 @@ public class CreateMeasurementUnitCommandHandlerTests
         var command = new CreateMeasurementUnitCommand("Liter", "L");
         
         _measurementUnitRepositoryMock
-            .Setup(x => x.ExistsByNameAsync(command.Name, It.IsAny<CancellationToken>()))
+            .Setup(x => x.ExistsByNameAsync(command.Name, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
             
         _measurementUnitRepositoryMock
-            .Setup(x => x.ExistsByAbbreviationAsync(command.Abbreviation, It.IsAny<CancellationToken>()))
+            .Setup(x => x.ExistsByAbbreviationAsync(command.Abbreviation, null,It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         // Act & Assert

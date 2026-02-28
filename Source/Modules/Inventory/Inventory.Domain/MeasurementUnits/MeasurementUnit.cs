@@ -1,4 +1,5 @@
 ﻿using Blocks.Domain.Abstractions;
+using Blocks.Domain.Exceptions;
 using Inventory.Domain.MeasurementUnits.ValueObjects;
 
 namespace Inventory.Domain.MeasurementUnits;
@@ -19,6 +20,10 @@ public class MeasurementUnit : AggregateRoot
 
     public void Update(MeasurementUnitName measurementUnitName, MeasurementUnitAbbreviation measurementUnitAbbreviation)
     {
+        if (measurementUnitName == this.MeasurementUnitName &&
+            measurementUnitAbbreviation == this.MeasurementUnitAbbreviation)
+            return;
+        
         MeasurementUnitName = measurementUnitName;
         MeasurementUnitAbbreviation = measurementUnitAbbreviation;
     }

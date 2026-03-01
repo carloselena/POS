@@ -1,3 +1,6 @@
-﻿namespace Inventory.Application.Features.MeasurementUnits.Queries.Commands.DeleteMeasurementUnit;
+﻿using System.Text.Json.Serialization;
+using MediatR;
 
-public record DeleteMeasurementUnitCommand();
+namespace Inventory.Application.Features.MeasurementUnits.Commands.DeleteMeasurementUnit;
+
+public record DeleteMeasurementUnitCommand([property: JsonIgnore] Guid Id) : IRequest;

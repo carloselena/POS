@@ -1,4 +1,5 @@
 ﻿using Inventory.Application.Features.MeasurementUnits.Commands.CreateMeasurementUnit;
+using Inventory.Application.Features.MeasurementUnits.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -16,12 +17,12 @@ public static class CreateMeasurementUnitEndpoint
                 ISender sender,
                 CancellationToken cancellationToken) =>
         {
-            await sender.Send(command, cancellationToken);
-            return Results.StatusCode(StatusCodes.Status201Created);
+            var result = await sender.Send(command, cancellationToken);
+            return Results.Created($"/measurement-units/{result.Id}", result);
         })
         .WithName("CreateMeasurementUnit")
         .WithTags("MeasurementUnits")
-        .Produces(StatusCodes.Status201Created)
+        .Produces<MeasurementUnitDto>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status409Conflict)
         .ProducesProblem(StatusCodes.Status500InternalServerError);

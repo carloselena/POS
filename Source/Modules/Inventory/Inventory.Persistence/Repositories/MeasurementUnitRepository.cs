@@ -24,4 +24,9 @@ public class MeasurementUnitRepository(InventoryDbContext dbContext)
     {
         return await Query().ToListAsync(cancellationToken);
     }
+
+    public void Remove(MeasurementUnit measurementUnit)
+    {
+        Context.Remove(measurementUnit);
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Inventory.Application.Features.MeasurementUnits.Commands.UpdateMeasurementUnit;
+using Inventory.Application.Features.MeasurementUnits.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -17,12 +18,12 @@ public static class UpdateMeasurementUnitEndpoint
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            await sender.Send(command with { Id = id }, cancellationToken);
-            return Results.Ok();
+            var result = await sender.Send(command with { Id = id }, cancellationToken);
+            return Results.Ok(result);
         })
         .WithName("UpdateMeasurementUnit")
         .WithTags("MeasurementUnits")
-        .Produces(StatusCodes.Status200OK)
+        .Produces<MeasurementUnitDto>()
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .ProducesProblem(StatusCodes.Status409Conflict)

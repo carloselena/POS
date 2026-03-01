@@ -1,12 +1,13 @@
 ﻿using Blocks.Domain.Abstractions;
 using Blocks.Domain.Exceptions;
+using Inventory.Application.Features.MeasurementUnits.Queries;
 using Inventory.Domain.MeasurementUnits;
 using Inventory.Domain.MeasurementUnits.ValueObjects;
 using MediatR;
 
 namespace Inventory.Application.Features.MeasurementUnits.Commands.CreateMeasurementUnit;
 
-public class CreateMeasurementUnitCommandHandler : IRequestHandler<CreateMeasurementUnitCommand>
+public class CreateMeasurementUnitCommandHandler : IRequestHandler<CreateMeasurementUnitCommand, MeasurementUnitDto>
 {
     private readonly IMeasurementUnitRepository _measurementUnitRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -16,7 +17,7 @@ public class CreateMeasurementUnitCommandHandler : IRequestHandler<CreateMeasure
         _measurementUnitRepository = measurementUnitRepository;
         _unitOfWork = unitOfWork;
     }
-    public async Task Handle(CreateMeasurementUnitCommand command, CancellationToken cancellationToken)
+    public async Task<MeasurementUnitDto> Handle(CreateMeasurementUnitCommand command, CancellationToken cancellationToken)
     {
         if (await _measurementUnitRepository.ExistsByNameAsync(command.Name, null, cancellationToken))
             throw new DomainException("Ya existe una unidad de medida con ese nombre");
@@ -28,5 +29,12 @@ public class CreateMeasurementUnitCommandHandler : IRequestHandler<CreateMeasure
 
         await _measurementUnitRepository.AddAsync(measurementUnit, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
+        
+        return new MeasurementUnitDto
+        {
+            Id = measurementUnit.Id,
+            Name = measurementUnit.MeasurementUnitName,
+            Abbreviation = measurementUnit.MeasurementUnitAbbreviation
+        };
     }
 }

@@ -11,17 +11,21 @@ namespace Inventory.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "inventory");
+
             migrationBuilder.CreateTable(
-                name: "MeasurementUnit",
+                name: "measurement_units",
+                schema: "inventory",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Abbreviation = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false)
+                    abbreviation = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false),
+                    name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MeasurementUnit", x => x.Id);
+                    table.PrimaryKey("PK_measurement_units", x => x.Id);
                 });
         }
 
@@ -29,7 +33,8 @@ namespace Inventory.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MeasurementUnit");
+                name: "measurement_units",
+                schema: "inventory");
         }
     }
 }

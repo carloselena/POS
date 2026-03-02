@@ -8,13 +8,15 @@ public class MeasurementUnitEntityConfiguration : IEntityTypeConfiguration<Measu
 {
     public void Configure(EntityTypeBuilder<MeasurementUnit> builder)
     {
+        builder.ToTable("measurement_units", "inventory");
+        
         builder.HasKey(mu => mu.Id);
         builder.Property(mu => mu.Id).ValueGeneratedNever().HasColumnOrder(0);
 
         builder.ComplexProperty(mu => mu.MeasurementUnitName, builder =>
         {
             builder.Property(n => n.Value)
-                .HasColumnName("Name")
+                .HasColumnName("name")
                 .HasMaxLength(20)
                 .IsRequired();
         });
@@ -22,7 +24,7 @@ public class MeasurementUnitEntityConfiguration : IEntityTypeConfiguration<Measu
         builder.ComplexProperty(mu => mu.MeasurementUnitAbbreviation, builder =>
         {
             builder.Property(a => a.Value)
-                .HasColumnName("Abbreviation")
+                .HasColumnName("abbreviation")
                 .HasMaxLength(3)
                 .IsRequired();
         });

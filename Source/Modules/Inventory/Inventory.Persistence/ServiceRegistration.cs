@@ -1,5 +1,6 @@
 ﻿using Blocks.Domain.Abstractions;
 using Inventory.Domain.MeasurementUnits;
+using Inventory.Domain.Products;
 using Inventory.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,5 +20,6 @@ public static class ServiceRegistration
 
         services.AddScoped<IUnitOfWork, InventoryUnitOfWork>();
         services.AddScoped<IMeasurementUnitRepository, MeasurementUnitRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
     }
 }

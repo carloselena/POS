@@ -21,13 +21,15 @@ public class Product : AggregateRoot
         Money wholesalePrice, Stock stock, decimal minStock = 0)
     {
         Guard.AgainstNullOrWhiteSpace(description, nameof(description));
+        Guard.AgainstNegativeDecimal(minStock, "minStock");
+        Guard.AgainstMoreThanTwoDecimals(minStock, "minStock");
 
         if (cost.Amount >= price.Amount)
             throw new DomainException("El precio debe ser mayor que el costo");
 
         if (wholesalePrice.Amount > price.Amount)
             throw new DomainException("El precio al por mayor no puede ser mayor al precio regular");
-        
+
         BarCode = barCode;
         Description = description;
         Cost = cost;

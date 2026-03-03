@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Blocks.Domain.Exceptions;
 
 namespace Blocks.Domain.Guards;
 
@@ -27,6 +28,12 @@ public static partial class Guard
     {
         if (!EmailRegex().IsMatch(value))
             throw new ArgumentException($"El correo es inválido");
+    }
+
+    public static void AgainstNegativeDecimal(decimal value, string propertyName)
+    {
+        if (value < 0)
+            throw new ArgumentException($"{propertyName} no puede ser negativo", propertyName);
     }
 }
 

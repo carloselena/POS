@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Inventory.Persistence.Migrations
 {
     [DbContext(typeof(InventoryDbContext))]
-    [Migration("20260226043745_InitialMigration")]
+    [Migration("20260301222800_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace Inventory.Persistence.Migrations
                                 .IsRequired()
                                 .HasMaxLength(3)
                                 .HasColumnType("character varying(3)")
-                                .HasColumnName("Abbreviation");
+                                .HasColumnName("abbreviation");
                         });
 
                     b.ComplexProperty(typeof(Dictionary<string, object>), "MeasurementUnitName", "Inventory.Domain.MeasurementUnits.MeasurementUnit.MeasurementUnitName#MeasurementUnitName", b1 =>
@@ -51,12 +51,12 @@ namespace Inventory.Persistence.Migrations
                                 .IsRequired()
                                 .HasMaxLength(20)
                                 .HasColumnType("character varying(20)")
-                                .HasColumnName("Name");
+                                .HasColumnName("name");
                         });
 
                     b.HasKey("Id");
 
-                    b.ToTable("MeasurementUnit");
+                    b.ToTable("measurement_units", "inventory");
                 });
 #pragma warning restore 612, 618
         }

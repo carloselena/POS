@@ -10,6 +10,7 @@ public record Quantity
     public Quantity(decimal value)
     {
         Guard.AgainstNegativeDecimal(value, "cantidad");
+        Guard.AgainstMoreThanTwoDecimals(value, "Cantidad");
 
         Value = value;
     }

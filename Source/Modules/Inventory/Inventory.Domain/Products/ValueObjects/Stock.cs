@@ -11,6 +11,7 @@ public record Stock
     public Stock(decimal value = 0)
     {
         Guard.AgainstNegativeDecimal(value, "stock");
+        Guard.AgainstMoreThanTwoDecimals(value, "Stock");
         
         Value = value;
     }

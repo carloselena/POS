@@ -35,6 +35,12 @@ public static partial class Guard
         if (value < 0)
             throw new ArgumentException($"{propertyName} no puede ser negativo", propertyName);
     }
+
+    public static void AgainstMoreThanTwoDecimals(decimal value, string propertyName)
+    {
+        if (value * 100 != decimal.Truncate(value * 100))
+            throw new DomainException($"{propertyName} no puede tener más de dos decimales");
+    }
 }
 
 public static partial class Guard

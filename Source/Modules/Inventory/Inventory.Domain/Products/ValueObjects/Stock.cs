@@ -1,6 +1,8 @@
-﻿using Blocks.Domain.Exceptions;
+﻿using System.Runtime.CompilerServices;
+using Blocks.Domain.Exceptions;
 using Blocks.Domain.Guards;
-using Blocks.Domain.ValueObjects;
+
+[assembly: InternalsVisibleTo("Inventory.Tests")]
 
 namespace Inventory.Domain.Products.ValueObjects;
 
@@ -15,6 +17,8 @@ public record Stock
         
         Value = value;
     }
+    
+    public sealed override string ToString() => $"{Value}";
 
     internal Stock Increase(Quantity quantity)
         => new Stock(Value + quantity.Value);

@@ -1,7 +1,7 @@
 ﻿using Blocks.Domain.Exceptions;
 using Blocks.Domain.Guards;
 
-namespace Blocks.Domain.ValueObjects;
+namespace Inventory.Domain.Products.ValueObjects;
 
 public record Quantity
 {
@@ -14,4 +14,6 @@ public record Quantity
 
         Value = value;
     }
+    
+    public sealed override string ToString() => $"{Value}";
 }

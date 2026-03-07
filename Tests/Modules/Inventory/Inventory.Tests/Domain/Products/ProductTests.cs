@@ -1,0 +1,141 @@
+﻿using Blocks.Domain.Enums;
+using Blocks.Domain.Exceptions;
+using Blocks.Domain.ValueObjects;
+using Inventory.Domain.Products;
+using Inventory.Domain.Products.ValueObjects;
+
+namespace Inventory.Tests.Domain.Products;
+
+[TestFixture]
+public class ProductTests
+{
+    private BarCode _validBarCode;
+    private Money _validCost;
+    private Money _validPrice;
+    private Quantity _validWholesaleQuantity;
+    private Money _validWholesalePrice;
+    private Stock _validStock;
+
+    [SetUp]
+    public void SetUp()
+    {
+        _validBarCode = new BarCode("1234567890123");
+        _validCost = new Money(10.0m, Currency.DOP);
+        _validPrice = new Money(15.0m, Currency.DOP);
+        _validWholesaleQuantity = new Quantity(10);
+        _validWholesalePrice = new Money(12.0m, Currency.DOP);
+        _validStock = new Stock(100);
+    }
+
+    [Test]
+    public void Constructor_WithValidParameters_ShouldCreateProduct()
+    {
+        // Arrange
+        var description = "Test Product";
+        
+        // Act
+        var product = new Product(_validBarCode, description, _validCost, _validPrice, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock);
+        
+        // Assert
+        Assert.That(product.BarCode, Is.EqualTo(_validBarCode));
+        Assert.That(product.Description, Is.EqualTo(description));
+        Assert.That(product.Cost, Is.EqualTo(_validCost));
+        Assert.That(product.Price, Is.EqualTo(_validPrice));
+        Assert.That(product.WholesaleQuantity, Is.EqualTo(_validWholesaleQuantity));
+        Assert.That(product.WholesalePrice, Is.EqualTo(_validWholesalePrice));
+        Assert.That(product.Stock, Is.EqualTo(_validStock));
+        Assert.That(product.MinStock, Is.EqualTo(0));
+        Assert.That(product.Id, Is.Not.EqualTo(Guid.Empty));
+    }
+
+    [TestCase("")]
+    [TestCase("   ")]
+    public void Constructor_WithInvalidDescription_ShouldThrowArgumentException(string invalidDescription)
+    {
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentException>(() => new Product(
+            _validBarCode, invalidDescription, _validCost, _validPrice, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock));
+        
+        Assert.That(exception.Message, Does.Contain("description"));
+    }
+
+    [Test]
+    public void Constructor_WithCostGreaterOrEqualPrice_ShouldThrowDomainException()
+    {
+        // Arrange
+        var cost = new Money(15.0m, Currency.DOP);
+        var price = new Money(15.0m, Currency.DOP);
+        
+        // Act & Assert
+        var exception = Assert.Throws<DomainException>(() => new Product(
+            _validBarCode, "Test Product", cost, price, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock));
+        
+        Assert.That(exception.Message, Does.Contain("precio debe ser mayor que el costo"));
+    }
+
+    [Test]
+    public void Constructor_WithWholesalePriceGreaterThanPrice_ShouldThrowDomainException()
+    {
+        // Arrange
+        var wholesalePrice = new Money(20.0m, Currency.DOP);
+        
+        // Act & Assert
+        var exception = Assert.Throws<DomainException>(() => new Product(
+            _validBarCode, "Test Product", _validCost, _validPrice, 
+            _validWholesaleQuantity, wholesalePrice, _validStock));
+        
+        Assert.That(exception.Message, Does.Contain("precio al por mayor no puede ser mayor al precio regular"));
+    }
+
+    [TestCase(-1)]
+    [TestCase(-0.01)]
+    public void Constructor_WithNegativeMinStock_ShouldThrowArgumentException(decimal invalidMinStock)
+    {
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentException>(() => new Product(
+            _validBarCode, "Test Product", _validCost, _validPrice, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, invalidMinStock));
+        
+        Assert.That(exception.Message, Does.Contain("minStock"));
+    }
+
+    [TestCase(1.001)]
+    [TestCase(10.123)]
+    public void Constructor_WithMoreThanTwoDecimalsMinStock_ShouldThrowDomainException(decimal invalidMinStock)
+    {
+        // Act & Assert
+        var exception = Assert.Throws<DomainException>(() => new Product(
+            _validBarCode, "Test Product", _validCost, _validPrice, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, invalidMinStock));
+        
+        Assert.That(exception.Message, Does.Contain("minStock"));
+    }
+
+    [Test]
+    public void Constructor_WithValidMinStock_ShouldCreateProductWithMinStock()
+    {
+        // Arrange
+        var minStock = 5.5m;
+        
+        // Act
+        var product = new Product(_validBarCode, "Test Product", _validCost, _validPrice, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, minStock);
+        
+        // Assert
+        Assert.That(product.MinStock, Is.EqualTo(minStock));
+    }
+
+    [Test]
+    public void Constructor_WithDefaultMinStock_ShouldCreateProductWithZeroMinStock()
+    {
+        // Act
+        var product = new Product(_validBarCode, "Test Product", _validCost, _validPrice, 
+            _validWholesaleQuantity, _validWholesalePrice, _validStock);
+        
+        // Assert
+        Assert.That(product.MinStock, Is.EqualTo(0));
+    }
+}

@@ -16,11 +16,12 @@ public class Product : AggregateRoot
     public Money WholesalePrice { get; private set; }
     public Stock Stock { get; private set; }
     public decimal MinStock { get; private set; }
+    public Guid MeasurementUnitId { get; private set; }
     
     private Product() { }
 
     public Product(BarCode barCode, string description, Money cost, Money price, Quantity wholesaleQuantity,
-        Money wholesalePrice, Stock stock, decimal minStock = 0)
+        Money wholesalePrice, Stock stock, Guid measurementUnitId, decimal minStock = 0)
     {
         Guard.AgainstNullOrWhiteSpace(description, nameof(description));
         Guard.AgainstNegativeDecimal(minStock, "minStock");
@@ -40,6 +41,7 @@ public class Product : AggregateRoot
         WholesalePrice = wholesalePrice;
         Stock = stock;
         MinStock = minStock;
+        MeasurementUnitId = measurementUnitId;
         Id = Guid.CreateVersion7();
     }
 }

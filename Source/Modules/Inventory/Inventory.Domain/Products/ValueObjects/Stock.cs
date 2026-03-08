@@ -1,6 +1,5 @@
 ﻿using Blocks.Domain.Exceptions;
 using Blocks.Domain.Guards;
-using Blocks.Domain.ValueObjects;
 
 namespace Inventory.Domain.Products.ValueObjects;
 

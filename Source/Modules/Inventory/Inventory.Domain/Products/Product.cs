@@ -16,6 +16,8 @@ public class Product : AggregateRoot
     public Money WholesalePrice { get; private set; }
     public Stock Stock { get; private set; }
     public decimal MinStock { get; private set; }
+    
+    private Product() { }
 
     public Product(BarCode barCode, string description, Money cost, Money price, Quantity wholesaleQuantity,
         Money wholesalePrice, Stock stock, decimal minStock = 0)

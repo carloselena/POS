@@ -32,10 +32,11 @@ public class ProductTests
     {
         // Arrange
         var description = "Test Product";
+        Guid measurementUnitId = Guid.CreateVersion7();
         
         // Act
         var product = new Product(_validBarCode, description, _validCost, _validPrice, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock);
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId);
         
         // Assert
         Assert.That(product.BarCode, Is.EqualTo(_validBarCode));
@@ -53,10 +54,13 @@ public class ProductTests
     [TestCase("   ")]
     public void Constructor_WithInvalidDescription_ShouldThrowArgumentException(string invalidDescription)
     {
+        // Arrange
+        Guid measurementUnitId = Guid.CreateVersion7();
+        
         // Act & Assert
         var exception = Assert.Throws<ArgumentException>(() => new Product(
             _validBarCode, invalidDescription, _validCost, _validPrice, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock));
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId));
         
         Assert.That(exception.Message, Does.Contain("description"));
     }
@@ -67,11 +71,12 @@ public class ProductTests
         // Arrange
         var cost = new Money(15.0m, Currency.DOP);
         var price = new Money(15.0m, Currency.DOP);
+        Guid measurementUnitId = Guid.CreateVersion7();
         
         // Act & Assert
         var exception = Assert.Throws<DomainException>(() => new Product(
             _validBarCode, "Test Product", cost, price, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock));
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId));
         
         Assert.That(exception.Message, Does.Contain("precio debe ser mayor que el costo"));
     }
@@ -81,11 +86,12 @@ public class ProductTests
     {
         // Arrange
         var wholesalePrice = new Money(20.0m, Currency.DOP);
+        Guid measurementUnitId = Guid.CreateVersion7();
         
         // Act & Assert
         var exception = Assert.Throws<DomainException>(() => new Product(
             _validBarCode, "Test Product", _validCost, _validPrice, 
-            _validWholesaleQuantity, wholesalePrice, _validStock));
+            _validWholesaleQuantity, wholesalePrice, _validStock, measurementUnitId));
         
         Assert.That(exception.Message, Does.Contain("precio al por mayor no puede ser mayor al precio regular"));
     }
@@ -94,10 +100,13 @@ public class ProductTests
     [TestCase(-0.01)]
     public void Constructor_WithNegativeMinStock_ShouldThrowArgumentException(decimal invalidMinStock)
     {
+        // Arrange
+        Guid measurementUnitId = Guid.CreateVersion7();
+        
         // Act & Assert
         var exception = Assert.Throws<ArgumentException>(() => new Product(
             _validBarCode, "Test Product", _validCost, _validPrice, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock, invalidMinStock));
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId, invalidMinStock));
         
         Assert.That(exception.Message, Does.Contain("minStock"));
     }
@@ -106,10 +115,13 @@ public class ProductTests
     [TestCase(10.123)]
     public void Constructor_WithMoreThanTwoDecimalsMinStock_ShouldThrowDomainException(decimal invalidMinStock)
     {
+        // Arrange
+        Guid measurementUnitId = Guid.CreateVersion7();
+        
         // Act & Assert
         var exception = Assert.Throws<DomainException>(() => new Product(
             _validBarCode, "Test Product", _validCost, _validPrice, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock, invalidMinStock));
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId, invalidMinStock));
         
         Assert.That(exception.Message, Does.Contain("minStock"));
     }
@@ -119,10 +131,11 @@ public class ProductTests
     {
         // Arrange
         var minStock = 5.5m;
+        Guid measurementUnitId = Guid.CreateVersion7();
         
         // Act
         var product = new Product(_validBarCode, "Test Product", _validCost, _validPrice, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock, minStock);
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId, minStock);
         
         // Assert
         Assert.That(product.MinStock, Is.EqualTo(minStock));
@@ -131,9 +144,12 @@ public class ProductTests
     [Test]
     public void Constructor_WithDefaultMinStock_ShouldCreateProductWithZeroMinStock()
     {
+        // Arrange
+        Guid measurementUnitId = Guid.CreateVersion7();
+        
         // Act
         var product = new Product(_validBarCode, "Test Product", _validCost, _validPrice, 
-            _validWholesaleQuantity, _validWholesalePrice, _validStock);
+            _validWholesaleQuantity, _validWholesalePrice, _validStock, measurementUnitId);
         
         // Assert
         Assert.That(product.MinStock, Is.EqualTo(0));

@@ -13,4 +13,6 @@ public record Quantity
 
         Value = value;
     }
+    
+    public sealed override string ToString() => $"{Value}";
 }

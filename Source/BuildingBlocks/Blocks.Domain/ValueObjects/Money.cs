@@ -7,6 +7,8 @@ public sealed record Money
 {
     public decimal Amount { get; }
     public Currency Currency { get; } = Currency.DOP;
+    
+    private Money() {}
 
     public Money(decimal amount, Currency currency = Currency.DOP)
     {

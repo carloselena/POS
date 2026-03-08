@@ -1,4 +1,5 @@
 ﻿using Inventory.Presentation.Endpoints.MeasurementUnits;
+using Inventory.Presentation.Endpoints.Products;
 using Microsoft.AspNetCore.Routing;
 namespace Inventory.Presentation;
 
@@ -13,6 +14,11 @@ public static class EndpointsRegistration
             .MapGetMeasurementUnitByIdEndpoint()
             .MapUpdateMeasurementUnitEndpoint()
             .MapDeleteMeasurementUnitEndpoint();
+        #endregion
+        
+        #region Products
+        app
+            .MapCreateProductEndpoint();
         #endregion
         
         return app;

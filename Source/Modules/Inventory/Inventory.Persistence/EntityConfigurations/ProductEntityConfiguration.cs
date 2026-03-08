@@ -16,13 +16,16 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
             .HasColumnName("id")
             .HasColumnOrder(0);
 
-        builder.ComplexProperty(p => p.BarCode, barCode =>
+        builder.OwnsOne(p => p.BarCode, barCode =>
         {
             barCode.Property(b => b.Value)
                 .HasColumnName("bar_code")
                 .HasMaxLength(14)
                 .HasColumnOrder(1)
                 .IsRequired();
+
+            barCode.HasIndex(bc => bc.Value)
+                .IsUnique();
         });
 
         builder.Property(p => p.Description)

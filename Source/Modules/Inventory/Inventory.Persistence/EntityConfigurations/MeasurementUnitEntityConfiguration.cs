@@ -13,20 +13,26 @@ public class MeasurementUnitEntityConfiguration : IEntityTypeConfiguration<Measu
         builder.HasKey(mu => mu.Id);
         builder.Property(mu => mu.Id).ValueGeneratedNever().HasColumnOrder(0);
 
-        builder.ComplexProperty(mu => mu.MeasurementUnitName, muName =>
+        builder.OwnsOne(mu => mu.MeasurementUnitName, muName =>
         {
             muName.Property(n => n.Value)
                 .HasColumnName("name")
                 .HasMaxLength(20)
                 .IsRequired();
+
+            muName.HasIndex(n => n.Value)
+                .IsUnique();
         });
 
-        builder.ComplexProperty(mu => mu.MeasurementUnitAbbreviation, muAbbreviation =>
+        builder.OwnsOne(mu => mu.MeasurementUnitAbbreviation, muAbbreviation =>
         {
             muAbbreviation.Property(a => a.Value)
                 .HasColumnName("abbreviation")
                 .HasMaxLength(3)
                 .IsRequired();
+
+            muAbbreviation.HasIndex(a => a.Value)
+                .IsUnique();
         });
     }
 }

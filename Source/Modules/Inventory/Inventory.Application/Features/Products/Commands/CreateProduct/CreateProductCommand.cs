@@ -10,5 +10,6 @@ public record CreateProductCommand(
     decimal WholesaleQuantity,
     decimal WholesalePrice,
     decimal Stock,
-    decimal MinStock
+    decimal MinStock,
+    Guid MeasurementUnitId
 ) : IRequest<ProductDto>;

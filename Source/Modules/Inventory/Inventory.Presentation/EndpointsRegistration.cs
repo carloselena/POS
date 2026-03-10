@@ -20,6 +20,7 @@ public static class EndpointsRegistration
         app
             .MapCreateProductEndpoint()
             .MapGetProductsEndpoint()
+            .MapGetProductByBarCodeEndpoint()
             ;
         #endregion
         

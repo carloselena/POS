@@ -12,7 +12,7 @@ public static class GetMeasurementUnitByIdEndpoint
 {
     public static IEndpointRouteBuilder MapGetMeasurementUnitByIdEndpoint(this IEndpointRouteBuilder app)
     {
-        app.MapGet("measurement-units/{id:guid}", async (
+        app.MapGet("/measurement-units/{id:guid}", async (
             [FromRoute] Guid id,
             ISender sender,
             CancellationToken cancellationToken) =>

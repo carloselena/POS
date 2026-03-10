@@ -18,7 +18,9 @@ public static class EndpointsRegistration
         
         #region Products
         app
-            .MapCreateProductEndpoint();
+            .MapCreateProductEndpoint()
+            .MapGetProductsEndpoint()
+            ;
         #endregion
         
         return app;

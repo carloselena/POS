@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Inventory.Application.Features.Products.Queries.GetProductByBarCode;
 
-public class GetProductByIdQueryHandler : IRequestHandler<GetProductByBarCodeQuery, ProductDto>
+public class GetProductByBarCodeQueryHandler : IRequestHandler<GetProductByBarCodeQuery, ProductDto>
 {
     private readonly IProductQueries _queries;
 
-    public GetProductByIdQueryHandler(IProductQueries queries)
+    public GetProductByBarCodeQueryHandler(IProductQueries queries)
     {
         _queries = queries;
     }
